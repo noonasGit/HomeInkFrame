@@ -7,6 +7,8 @@ from requests.exceptions import RequestException
 from datetime import date, time, datetime, timezone
 import time
 from json import loads
+import configparser
+
 
 def gettransitdepartures(date_time:datetime, transit_apikey:str, stop_id:str):
 
@@ -93,7 +95,25 @@ def get_stopid_by_lat_long(lat_value:str,lon_value:str,transit_apikey:str,max_di
         print("Error gettin data from Transi API, "+rawresponse.reason)
         if rawresponse.reason == "Unauthorized" :
             print("API KEY ISSUE!!")
-            print("Please ensure you have entered a correct API key for transit in the config.ini file")
+            print("Please ensure you have entered a correct API key for transit in the transit.ini file")
             print("####################################################################################")
             print(api_error)
         return []
+
+def get_transit_config_data(file_path:str):
+    parser = configparser.ConfigParser()
+    parser.read(file_path)
+    data = dict()
+    data['transit_api_key-id'] = parser.get("transit-config", "transit_api_key")
+    data['Stop_1'] = parser.get("transit-config", "Stop_1")
+    data['Stop_1_name'] = parser.get("transit-config", "Stop_1_name")  
+    data['Stop_1_number'] = parser.get("transit-config", "Stop_1_number")
+    data['Stop_1_type'] = parser.get("transit-config", "Stop_1_type")
+
+    data['Stop_2'] = parser.get("transit-config", "Stop_2")
+    data['Stop_2_name'] = parser.get("transit-config", "Stop_2_name")  
+    data['Stop_2_number'] = parser.get("transit-config", "Stop_2_number")
+    data['Stop_2_type'] = parser.get("transit-config", "Stop_2_type")
+
+    parser.clear
+    return data
