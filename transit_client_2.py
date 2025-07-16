@@ -15,8 +15,8 @@ bus_times = []
 #draw.text((x, y), "70", font=self.fonts.larger, fill=black)
 #bus_w, bus_h = draw.textsize("00:00", font=self.fonts.SFCompact)
 #x = (bx + int((bus_icon.size[0]/2)) ) - int( (bus_w/2) )
-bus_times = gettransitdepartures(datetime.now(),"ad1a9e8a3f0ba93aa289174e8be54c71d0841f2faed400b65377f640cce80350","STM:102508")
-bus_times2 = gettransitdepartures(datetime.now(),"ad1a9e8a3f0ba93aa289174e8be54c71d0841f2faed400b65377f640cce80350","STM:102503")
+bus_times = gettransitdepartures(datetime.now(),"api_key_here","STM:102508")
+bus_times2 = gettransitdepartures(datetime.now(),"api_key_here","STM:102503")
 
 #bus_times = get70departures(datetime.now(),"enter-key-here")
 print("Getting Transit times...")
